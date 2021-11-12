@@ -1,9 +1,12 @@
 
+
+
 %{
 	#include <stdio.h>
 	#include <stdlib.h>
-	#include <string.h>
+	#include <string>
 	#include <vector>
+
 	using namespace std;
 	extern int lineCount;
 	extern int colCount;
@@ -14,6 +17,11 @@
 
 	void yyerror(const char *msg);
 	vector<char*> list_of;
+	string* NewTemp();
+
+	int temp_count = 0;
+
+
 
 %}
 
@@ -218,6 +226,11 @@ var:
 ;
 
 %%
+
+std::string* newTemp(){
+	string* temp = new string("__temp__" + toString(temp_count++));
+	return temp;
+}
 
 int main(int argc, char **argv) 
 {
